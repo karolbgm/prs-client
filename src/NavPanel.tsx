@@ -8,7 +8,7 @@ export default function NavPanel() {
       style={{ width: 280 }}
     >
       <a className="mb-4 text-decoration-none fw-bolder">
-        <svg className="bi pe-none me-2" width={16} height={16} fill="#007AFF">
+        <svg className="bi pe-none me-2" width={16} height={16} fill="currentColor">
           <use xlinkHref={`${bootstrapIcons}#plus-circle-fill`} />
         </svg>
         Create new
@@ -17,7 +17,7 @@ export default function NavPanel() {
         <li className="text-secondary fw-bold mb-2">Purchase</li>
         <li>
           <NavLink to="/requests" className="nav-link">
-            <svg className="bi pe-none me-2" width={16} height={16} fill="#007AFF">
+            <svg className="bi pe-none me-2" width={16} height={16} fill="currentColor">
               <use xlinkHref={`${bootstrapIcons}#cart`} />
             </svg>
             Requests
@@ -25,7 +25,7 @@ export default function NavPanel() {
         </li>
         <li>
           <NavLink to="/products" className="nav-link">
-            <svg className="bi pe-none me-2" width={16} height={16} fill="#007AFF">
+            <svg className="bi pe-none me-2" width={16} height={16} fill="currentColor">
               <use xlinkHref={`${bootstrapIcons}#grid`} />
             </svg>
             Products
@@ -33,7 +33,7 @@ export default function NavPanel() {
         </li>
         <li>
           <NavLink to="/vendors" className="nav-link">
-            <svg className="bi pe-none me-2" width={16} height={16} fill="#007AFF">
+            <svg className="bi pe-none me-2" width={16} height={16} fill="currentColor">
               <use xlinkHref={`${bootstrapIcons}#building`} />
             </svg>
             Vendors
@@ -41,7 +41,7 @@ export default function NavPanel() {
         </li>
         <li>
           <NavLink to="/users" className="nav-link">
-            <svg className="bi pe-none me-2" width={16} height={16} fill="#007AFF">
+            <svg className="bi pe-none me-2" width={16} height={16} fill="currentColor">
               <use xlinkHref={`${bootstrapIcons}#people`} />
             </svg>
             Users

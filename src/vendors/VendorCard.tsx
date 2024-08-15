@@ -1,6 +1,11 @@
 import bootstrapIcons from "bootstrap-icons/bootstrap-icons.svg";
+import { Vendor } from "./Vendor";
 
-export default function VendorCard() {
+interface VendorCardProps {
+  vendor: Vendor;
+}
+
+export default function VendorCard({ vendor }: VendorCardProps) {
   return (
     <>
       <div className="card w-25">
@@ -18,7 +23,7 @@ export default function VendorCard() {
           <div className="d-flex justify-content-between align-items-center">
             <span>
               {" "}
-              <strong>Amazon</strong> <span className="badge text-bg-secondary">AMAZ</span>{" "}
+              <strong>{vendor.name}</strong> <span className="badge text-bg-secondary">{vendor.code}</span>{" "}
             </span>
             <div className="dropdown d-inline">
               <button
@@ -47,14 +52,13 @@ export default function VendorCard() {
             </div>
           </div>
           <br />
-          123 Amazon Way
+          {vendor.address}
           <br />
-          Seattle, WA 83474
+          {vendor.state} {vendor.zip}
           <br />
-          {/* <abbr title="Phone">P:</abbr> */}
-          (800) 454-7890
+          {vendor.phone}
           <br />
-          primebusiness@amazon.com
+          {vendor.email}
         </address>
       </div>
     </>

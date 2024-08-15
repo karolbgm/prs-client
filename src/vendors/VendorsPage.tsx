@@ -1,6 +1,6 @@
 import bootstrapIcons from "bootstrap-icons/bootstrap-icons.svg";
-import VendorCard from "./VendorCard";
 import { Link } from "react-router-dom";
+import VendorList from "./VendorList";
 
 export default function VendorsPage() {
   return (
@@ -14,17 +14,7 @@ export default function VendorsPage() {
                 Create a vendor
               </Link>
       </header>
-
-      <section className="d-flex bg-light gap-5 p-4 rounded-4 flex-wrap">
-        <VendorCard />
-        <VendorCard />
-        <VendorCard />
-        <VendorCard />
-        <VendorCard />
-        <VendorCard />
-        <VendorCard />
-        <VendorCard />
-      </section>
+        <VendorList />
     </>
   );
 }

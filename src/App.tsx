@@ -12,6 +12,7 @@ import RequestsPage from "./requests/RequestsPage";
 import ProductsPage from "./products/ProductsPage";
 import UsersPage from "./users/UsersPage";
 import VendorCreatePage from "./vendors/VendorCreatePage";
+import VendorEditPage from "./vendors/VendorEditPage";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
               <Route path="/requests" element={<RequestsPage />} />
               <Route path="/requestlines" element={<RequestlinesPage />} />
               <Route path="/vendors/create" element={<VendorCreatePage />} />
+              <Route path="/vendors/edit" element={<VendorEditPage />} />
             </Routes>
           </section>
         </main>
