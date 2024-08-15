@@ -41,7 +41,7 @@ export const vendorAPI = {
           "Content-Type": "application/json",
         },
       }).then(checkStatus);
-      // .then(parseJSON);
+ 
     },
   
     delete(id: number) {

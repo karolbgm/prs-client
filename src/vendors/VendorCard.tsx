@@ -1,5 +1,6 @@
 import bootstrapIcons from "bootstrap-icons/bootstrap-icons.svg";
 import { Vendor } from "./Vendor";
+import Dropdown from "react-bootstrap/Dropdown";
 
 interface VendorCardProps {
   vendor: Vendor;
@@ -25,36 +26,23 @@ export default function VendorCard({ vendor }: VendorCardProps) {
               {" "}
               <strong>{vendor.name}</strong> <span className="badge text-bg-secondary">{vendor.code}</span>{" "}
             </span>
-            <div className="dropdown d-inline">
-              <button
-                className="btn btn-light"
-                style={{ background: "none" }}
-                type="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                <svg className="bi pe-none me-2" width={20} height={20} fill="#007AFF">
+            <Dropdown>
+              <Dropdown.Toggle  variant=""  id="dropdown-basic">
+              <svg className="bi pe-none me-2" width={20} height={20} fill="#007AFF">
                   <use xlinkHref={`${bootstrapIcons}#three-dots-vertical`} />
                 </svg>
-              </button>
-              <ul className="dropdown-menu">
-                <li>
-                  <a href="vendor-edit.html" className="dropdown-item" type="button">
-                    Edit
-                  </a>
-                </li>
-                <li>
-                  <button className="dropdown-item" type="button">
-                    Delete
-                  </button>
-                </li>
-              </ul>
-            </div>
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu>
+                <Dropdown.Item href={`vendors/edit/${vendor.id}`}>Edit</Dropdown.Item>
+                <Dropdown.Item href="#/action-2">Delete</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
           </div>
           <br />
           {vendor.address}
           <br />
-          {vendor.state} {vendor.zip}
+          {vendor.city}, {vendor.state} {vendor.zip}
           <br />
           {vendor.phone}
           <br />

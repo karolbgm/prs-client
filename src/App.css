@@ -51,3 +51,7 @@ a {
     rgba(237, 250, 255, 1) 60%
   );
 }
+
+.dropdown-toggle::after {
+  display: none !important; 
+}

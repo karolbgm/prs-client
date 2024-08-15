@@ -1,6 +1,4 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import bootstrapIcons from "bootstrap-icons/bootstrap-icons.svg";
-
 import "./App.css";
 import Header from "./Header";
 import NavPanel from "./NavPanel";
@@ -13,6 +11,7 @@ import ProductsPage from "./products/ProductsPage";
 import UsersPage from "./users/UsersPage";
 import VendorCreatePage from "./vendors/VendorCreatePage";
 import VendorEditPage from "./vendors/VendorEditPage";
+import VendorDetailPage from "./vendors/VendorDetailPage";
 
 function App() {
   return (
@@ -30,7 +29,8 @@ function App() {
               <Route path="/requests" element={<RequestsPage />} />
               <Route path="/requestlines" element={<RequestlinesPage />} />
               <Route path="/vendors/create" element={<VendorCreatePage />} />
-              <Route path="/vendors/edit" element={<VendorEditPage />} />
+              <Route path="/vendors/edit/:id" element={<VendorEditPage />} />
+              <Route path="/vendors/detail/:vendorId/*" element={<VendorDetailPage />} />
             </Routes>
           </section>
         </main>
