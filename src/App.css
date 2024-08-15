@@ -52,6 +52,6 @@ a {
   );
 }
 
-.dropdown-toggle::after {
+.no-arrow::after {
   display: none !important; 
 }

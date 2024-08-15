@@ -11,7 +11,6 @@ import ProductsPage from "./products/ProductsPage";
 import UsersPage from "./users/UsersPage";
 import VendorCreatePage from "./vendors/VendorCreatePage";
 import VendorEditPage from "./vendors/VendorEditPage";
-import VendorDetailPage from "./vendors/VendorDetailPage";
 
 function App() {
   return (
@@ -30,7 +29,7 @@ function App() {
               <Route path="/requestlines" element={<RequestlinesPage />} />
               <Route path="/vendors/create" element={<VendorCreatePage />} />
               <Route path="/vendors/edit/:id" element={<VendorEditPage />} />
-              <Route path="/vendors/detail/:vendorId/*" element={<VendorDetailPage />} />
+              {/* <Route path="/requests/detail/:requestId/*" element={} /> */}
             </Routes>
           </section>
         </main>
