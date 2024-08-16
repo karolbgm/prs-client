@@ -8,10 +8,12 @@ import VendorsPage from "./vendors/VendorsPage";
 import RequestlinesPage from "./requestlines/RequestlinesPage";
 import RequestsPage from "./requests/RequestsPage";
 import ProductsPage from "./products/ProductsPage";
-import UsersPage from "./users/UsersPage";
 import VendorCreatePage from "./vendors/VendorCreatePage";
 import VendorEditPage from "./vendors/VendorEditPage";
 import { Toaster } from "react-hot-toast";
+import UsersPage from "./users/UsersPage";
+import UserEditPage from "./users/UserEditPage";
+import UserCreatePage from "./users/UserCreatePage";
 
 function App() {
   return (
@@ -43,6 +45,8 @@ function App() {
               <Route path="/requestlines" element={<RequestlinesPage />} />
               <Route path="/vendors/create" element={<VendorCreatePage />} />
               <Route path="/vendors/edit/:id" element={<VendorEditPage />} />
+              <Route path="/users/create" element={<UserCreatePage />} />
+              <Route path="/users/edit/:id" element={<UserEditPage />} />
               {/* <Route path="/requests/detail/:requestId/*" element={} /> */}
             </Routes>
           </section>
