@@ -1,43 +1,43 @@
 import bootstrapIcons from "bootstrap-icons/bootstrap-icons.svg";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { Vendor } from "./Vendor";
+import { User } from "./User";
 import toast from "react-hot-toast";
-import { vendorAPI } from "./VendorAPI";
+import { userAPI } from "./UserAPI";
 
-export default function VendorForm() {
+export default function UserForm() {
   //we will navigate back to the main page when save
   const navigate = useNavigate();
   //I need the id from useParams to pass to the find()
   //in this case, the type needs to specify the key?
   const { id } = useParams<{ id: string }>();
-  const vendorId = Number(id);
+  const userId = Number(id);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Vendor>({
+  } = useForm<User>({
     defaultValues: async () => {
-      if (!vendorId) {
-        return Promise.resolve(new Vendor());
+      if (!userId) {
+        return Promise.resolve(new User());
       } else {
-        return await vendorAPI.find(vendorId);
+        return await userAPI.find(userId);
       }
     },
   });
 
-  const save: SubmitHandler<Vendor> = async (vendor) => {
+  const save: SubmitHandler<User> = async (user) => {
     try {
-      if (vendor.isNew) {
-        await vendorAPI.post(vendor);
+      if (user.isNew) {
+        await userAPI.post(user);
         toast.success("Successfully created.");
       } else {
-        await vendorAPI.put(vendor);
+        await userAPI.put(user);
         toast.success("Successfully updated.");
 
       }
-      navigate("/vendors");
+      navigate("/users");
     } catch (error: any) {
       toast.error(error.message);
     }
@@ -48,28 +48,28 @@ export default function VendorForm() {
       <div className="row-1 d-flex flex-row w-100 gap-4">
         <div className="mb-3 w-25">
           <label htmlFor="code" className="form-label">
-            Vendor Code
+            User Code
           </label>
           <input
             id="code"
             type="text"
             className={`form-control ${errors.code && "is-invalid"}`}
-            placeholder="Enter short vendor code"
+            placeholder="Enter short user code"
             {...register("code", { required: true, maxLength: 30 })}
             autoFocus
           />
-          <div className="invalid-feedback">{errors?.code?.type === "required" && "Vendor code is required"}</div>
+          <div className="invalid-feedback">{errors?.code?.type === "required" && "User code is required"}</div>
           <div className="invalid-feedback">{errors?.code?.type === "maxLength" && "No longer than 30 characters"}</div>
         </div>
         <div className="mb-3 w-75">
           <label htmlFor="name" className="form-label">
-            Vendor Name
+            User Name
           </label>
           <input
             id="name"
             type="text"
             className={`form-control ${errors.name && "is-invalid"}`}
-            placeholder="Enter vendor name"
+            placeholder="Enter user name"
             {...register("name", { required: true, maxLength: 30 })}
             autoFocus
           />
@@ -86,7 +86,7 @@ export default function VendorForm() {
             id="address"
             type="text"
             className={`form-control ${errors.address && "is-invalid"}`}
-            placeholder="Enter vendor's address"
+            placeholder="Enter user's address"
             {...register("address", { required: true, maxLength: 30 })}
             autoFocus
           />
@@ -223,14 +223,14 @@ export default function VendorForm() {
       </div>
       <div className="row-3 d-flex flex-row justify-content-end w-100 gap-4">
         <div className="d-flex justify-content-end mt-4">
-          <Link className="btn btn-outline-primary me-2" to={"/vendors"}>
+          <Link className="btn btn-outline-primary me-2" to={"/users"}>
             Cancel
           </Link>
           <button className="btn btn-primary">
             <svg className="bi pe-none me-2" width={16} height={16} fill="#FFFFFF">
               <use xlinkHref={`${bootstrapIcons}#save`} />
             </svg>
-            Save vendor
+            Save user
           </button>
         </div>
       </div>

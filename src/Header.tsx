@@ -21,49 +21,12 @@ export default function Header() {
             </svg>
             <span className="small mx-2 fw-semibold">Purchase Request System</span>
           </Link>
-          {/* <div className="dropdown me-4">
-            <a
-              href="#"
-              className="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              <Link className="btn btn-primary me-2" to="/login">
-                <svg width={16} height={16} fill="currentColor" className="bi bi-person me-2">
-                  <use xlinkHref={`${bootstrapIcons}#person`} />
-                </svg>
-                Sign in
-              </Link>
-
-              <strong>Karol Morgan</strong>
-            </a>
-            <ul className="dropdown-menu text-small shadow">
-              <li>
-                <a className="dropdown-item" href="#">
-                  Settings
-                </a>
-              </li>
-              <li>
-                <a className="dropdown-item" href="#">
-                  Profile
-                </a>
-              </li>
-              <li>
-                <hr className="dropdown-divider" />
-              </li>
-              <li>
-                <a href="signin.html" className="dropdown-item">
-                  Sign out
-                </a>
-              </li>
-            </ul>
-          </div> */}
           <Link className="btn btn-primary me-2" to="/login">
-                <svg width={16} height={16} fill="currentColor" className="bi bi-person me-2">
-                  <use xlinkHref={`${bootstrapIcons}#person`} />
-                </svg>
-                Sign in
-              </Link>
+            <svg width={16} height={16} fill="currentColor" className="bi bi-person me-2">
+              <use xlinkHref={`${bootstrapIcons}#person`} />
+            </svg>
+            Sign in
+          </Link>
           <Dropdown>
             <Dropdown.Toggle variant="" id="dropdown-basic">
               <strong>Karol Morgan</strong>

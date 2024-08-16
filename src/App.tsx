@@ -11,6 +11,7 @@ import ProductsPage from "./products/ProductsPage";
 import UsersPage from "./users/UsersPage";
 import VendorCreatePage from "./vendors/VendorCreatePage";
 import VendorEditPage from "./vendors/VendorEditPage";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
@@ -18,6 +19,19 @@ function App() {
       <div>
         <Header />
         <main className="d-flex">
+        <Toaster
+            toastOptions={{
+              success: {
+                iconTheme: {
+                  primary: "#0d6efd",
+                  secondary: "white",
+                },
+              },
+              style: {
+                maxWidth: 500,
+              },
+            }}
+          />
           <NavPanel />
           <section className="content container-fluid mx-5 my-2 py-4">
             <Routes>
