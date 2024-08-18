@@ -23,10 +23,10 @@ export default function NavPanel() {
           </Dropdown.Toggle>
 
           <Dropdown.Menu>
-            <Dropdown.Item href="requests/create">Request</Dropdown.Item>
-            <Dropdown.Item href="products/create">Product</Dropdown.Item>
-            <Dropdown.Item href="vendors/create">Vendor</Dropdown.Item>
-            <Dropdown.Item href="users/create">User</Dropdown.Item>
+            <Dropdown.Item href="/requests/create">Request</Dropdown.Item>
+            <Dropdown.Item href="/products/create">Product</Dropdown.Item>
+            <Dropdown.Item href="/vendors/create">Vendor</Dropdown.Item>
+            <Dropdown.Item href="/users/create">User</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
 

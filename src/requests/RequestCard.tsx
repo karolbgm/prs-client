@@ -60,6 +60,7 @@ export default function RequestCard({ request, onRemove }: RequestCardProps) {
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
+              <Dropdown.Item href={`requests/detail/${request.id}`}>Review</Dropdown.Item>
               <Dropdown.Item href={`requests/edit/${request.id}`}>Edit</Dropdown.Item>
               <Dropdown.Item
                 onClick={(event: SyntheticEvent) => {

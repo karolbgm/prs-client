@@ -6,7 +6,7 @@ export class Request {
     deliveryMode = "";
     status = "NEW";
     total: number = 0;
-    userId: number = 0;
+    userId: number = 3; //HARD CODED 
 
     
     get isNew(): boolean {
