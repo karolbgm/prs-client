@@ -6,14 +6,17 @@ import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import IndexPage from "./IndexPage";
 import VendorsPage from "./vendors/VendorsPage";
 import RequestlinesPage from "./requestlines/RequestlinesPage";
-import RequestsPage from "./requests/RequestsPage";
-import ProductsPage from "./products/ProductsPage";
+
 import VendorCreatePage from "./vendors/VendorCreatePage";
 import VendorEditPage from "./vendors/VendorEditPage";
 import { Toaster } from "react-hot-toast";
 import UsersPage from "./users/UsersPage";
 import UserEditPage from "./users/UserEditPage";
 import UserCreatePage from "./users/UserCreatePage";
+import ProductsPage from "./products/ProductsPage";
+import ProductCreatePage from "./products/ProductCreatePage";
+import ProductEditPage from "./products/ProductEditPage";
+import RequestsPage from "./requests/RequestsPage";
 
 function App() {
   return (
@@ -39,9 +42,12 @@ function App() {
             <Routes>
               <Route path="/" element={<IndexPage />} />
               <Route path="/vendors" element={<VendorsPage />} />
+              <Route path="/requests" element={<RequestsPage />} />
               <Route path="/users" element={<UsersPage />} />
               <Route path="/products" element={<ProductsPage />} />
-              <Route path="/requests" element={<RequestsPage />} />
+              <Route path="/products/create" element={<ProductCreatePage />} />
+              <Route path="/products/edit/:id" element={<ProductEditPage />} />
+
               <Route path="/requestlines" element={<RequestlinesPage />} />
               <Route path="/vendors/create" element={<VendorCreatePage />} />
               <Route path="/vendors/edit/:id" element={<VendorEditPage />} />

@@ -114,7 +114,7 @@ export default function VendorForm() {
             {errors?.city?.type === "maxLength" && "No longer than 30 characters"}
           </div>{" "}
         </div>
-        <div className="mb-3 w-25">
+        <div className="mb-3 w-25 mt-2">
           <label htmlFor="state">State</label>
           <select
             id="state"

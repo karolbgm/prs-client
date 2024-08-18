@@ -1,14 +1,14 @@
 import bootstrapIcons from "bootstrap-icons/bootstrap-icons.svg";
-import { User } from "./User";
+import { Request } from "./Request";
 import Dropdown from "react-bootstrap/Dropdown";
 import { SyntheticEvent } from "react";
 
-interface UserCardProps {
-  user: User;
-  onRemove: (user: User) => void;
+interface RequestCardProps {
+  request: Request;
+  onRemove: (request: Request) => void;
 }
 
-export default function UserCard({ user, onRemove }: UserCardProps) {
+export default function RequestCard({ request, onRemove }: RequestCardProps) {
   return (
     <>
       <div className="d-flex gap-4 " style={{ width: "25rem" }}>
@@ -16,14 +16,14 @@ export default function UserCard({ user, onRemove }: UserCardProps) {
           style={{ width: "6rem", height: "6rem" }}
           className="d-flex bg-secondary fs-3 text-white align-items-center justify-content-center rounded-circle me-2"
         >
-          {user.firstname[0].toUpperCase()}
-          {user.lastname[0].toUpperCase()}
+          {request.firstname[0].toUpperCase()}
+          {request.lastname[0].toUpperCase()}
         </div>
         <address>
           <div className="d-flex justify-content-between align-items-center">
             <span>
               <strong>
-                {user.firstname} {user.lastname}{" "}
+                {request.firstname} {request.lastname}{" "}
               </strong>
             </span>
 
@@ -35,11 +35,11 @@ export default function UserCard({ user, onRemove }: UserCardProps) {
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
-                <Dropdown.Item href={`users/edit/${user.id}`}>Edit</Dropdown.Item>
+                <Dropdown.Item href={`requests/edit/${request.id}`}>Edit</Dropdown.Item>
                 <Dropdown.Item
                   onClick={(event: SyntheticEvent) => {
                     event.preventDefault();
-                    onRemove(user);
+                    onRemove(request);
                   }}
                 >
                   Delete
@@ -49,13 +49,13 @@ export default function UserCard({ user, onRemove }: UserCardProps) {
           </div>
           <br />
           <span className="text-secondary">
-            {user.isAdmin && "Admin"} {user.isReviewer && "Reviewer"}
+            {request.isAdmin && "Admin"} {request.isReviewer && "Reviewer"}
           </span>
 
           <br />
-          <span className="text-secondary">{user.phone}</span>
+          <span className="text-secondary">{request.phone}</span>
           <br />
-          <div className="d-flex justify-content-start">{user.email}</div>
+          <div className="d-flex justify-content-start">{request.email}</div>
         </address>
       </div>
     </>

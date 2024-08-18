@@ -1,32 +1,34 @@
 import bootstrapIcons from "bootstrap-icons/bootstrap-icons.svg";
-import { User } from "./User";
+import { Product } from "./Product";
 import Dropdown from "react-bootstrap/Dropdown";
 import { SyntheticEvent } from "react";
+import { Badge } from "react-bootstrap";
 
-interface UserCardProps {
-  user: User;
-  onRemove: (user: User) => void;
+interface ProductCardProps {
+  product: Product;
+  onRemove: (product: Product) => void;
 }
 
-export default function UserCard({ user, onRemove }: UserCardProps) {
+export default function ProductCard({ product, onRemove }: ProductCardProps) {
   return (
     <>
-      <div className="d-flex gap-4 " style={{ width: "25rem" }}>
-        <div
-          style={{ width: "6rem", height: "6rem" }}
-          className="d-flex bg-secondary fs-3 text-white align-items-center justify-content-center rounded-circle me-2"
-        >
-          {user.firstname[0].toUpperCase()}
-          {user.lastname[0].toUpperCase()}
+      <div className="card w-25">
+        <div className="progress">
+          <div
+            className="progress-bar bg-primary"
+            role="progressbar"
+            style={{ width: "60%" }}
+            aria-valuenow={60}
+            aria-valuemin={0}
+            aria-valuemax={100}
+          />
         </div>
-        <address>
+        <address className="py-4 px-4">
           <div className="d-flex justify-content-between align-items-center">
             <span>
-              <strong>
-                {user.firstname} {user.lastname}{" "}
-              </strong>
+              {" "}
+              <strong>{product.name}</strong> 
             </span>
-
             <Dropdown>
               <Dropdown.Toggle variant="" id="dropdown-basic" className="no-arrow">
                 <svg className="bi pe-none me-2" width={20} height={20} fill="#007AFF">
@@ -35,11 +37,11 @@ export default function UserCard({ user, onRemove }: UserCardProps) {
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
-                <Dropdown.Item href={`users/edit/${user.id}`}>Edit</Dropdown.Item>
+                <Dropdown.Item href={`products/edit/${product.id}`}>Edit</Dropdown.Item>
                 <Dropdown.Item
                   onClick={(event: SyntheticEvent) => {
                     event.preventDefault();
-                    onRemove(user);
+                    onRemove(product);
                   }}
                 >
                   Delete
@@ -47,15 +49,12 @@ export default function UserCard({ user, onRemove }: UserCardProps) {
               </Dropdown.Menu>
             </Dropdown>
           </div>
-          <br />
-          <span className="text-secondary">
-            {user.isAdmin && "Admin"} {user.isReviewer && "Reviewer"}
-          </span>
+          <h6 className="card-subtitle mb-2">${product.price}/{product.unit}</h6>
 
           <br />
-          <span className="text-secondary">{user.phone}</span>
+          <span>{product.vendor?.name}</span>
           <br />
-          <div className="d-flex justify-content-start">{user.email}</div>
+          <Badge className="mt-2" bg="primary">{product.partNbr}</Badge>
         </address>
       </div>
     </>

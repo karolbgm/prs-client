@@ -6,3 +6,7 @@
 </svg>
 Create new
 </a> */}
+
+// {vendors.map((vendor) => (
+//     <option key={vendor.id} value={vendor.id}>{vendor.name}</option>
+//   )

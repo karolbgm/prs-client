@@ -1,42 +1,42 @@
 import bootstrapIcons from "bootstrap-icons/bootstrap-icons.svg";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { User } from "./User";
+import { Request } from "./Request";
 import toast from "react-hot-toast";
-import { userAPI } from "./UserAPI";
+import { requestAPI } from "./RequestAPI";
 
-export default function UserForm() {
+export default function RequestForm() {
   //we will navigate back to the main page when save
   const navigate = useNavigate();
   //I need the id from useParams to pass to the find()
   //in this case, the type needs to specify the key?
   const { id } = useParams<{ id: string }>();
-  const userId = Number(id);
+  const requestId = Number(id);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<User>({
+  } = useForm<Request>({
     defaultValues: async () => {
-      if (!userId) {
-        return Promise.resolve(new User());
+      if (!requestId) {
+        return Promise.resolve(new Request());
       } else {
-        return await userAPI.find(userId);
+        return await requestAPI.find(requestId);
       }
     },
   });
 
-  const save: SubmitHandler<User> = async (user) => {
+  const save: SubmitHandler<Request> = async (request) => {
     try {
-      if (user.isNew) {
-        await userAPI.post(user);
+      if (request.isNew) {
+        await requestAPI.post(request);
         toast.success("Successfully created.");
       } else {
-        await userAPI.put(user);
+        await requestAPI.put(request);
         toast.success("Successfully updated.");
       }
-      navigate("/users");
+      navigate("/requests");
     } catch (error: any) {
       toast.error(error.message);
     }
@@ -104,18 +104,18 @@ export default function UserForm() {
       </div>
       <div className="row-2 d-flex flex-row w-100 gap-4">
         <div className="mb-3 w-50">
-          <label htmlFor="username" className="form-label">
-            Username
+          <label htmlFor="requestname" className="form-label">
+            Requestname
           </label>
           <input
-            id="username"
+            id="requestname"
             type="text"
-            className={`form-control ${errors.username && "is-invalid"}`}
-            placeholder="Enter username"
-            {...register("username", { required: true, maxLength: 30 })}
+            className={`form-control ${errors.requestname && "is-invalid"}`}
+            placeholder="Enter requestname"
+            {...register("requestname", { required: true, maxLength: 30 })}
           />
-          <div className="invalid-feedback">{errors?.username?.type === "required" && "Username is required"}</div>
-          <div className="invalid-feedback">{errors?.username?.type === "maxLength" && "No longer than 30 characters"}</div>
+          <div className="invalid-feedback">{errors?.requestname?.type === "required" && "Requestname is required"}</div>
+          <div className="invalid-feedback">{errors?.requestname?.type === "maxLength" && "No longer than 30 characters"}</div>
         </div>
         <div className="mb-3 w-50">
           <label htmlFor="password" className="form-label">
@@ -152,14 +152,14 @@ export default function UserForm() {
       </div>
       <div className="row-3 d-flex flex-row justify-content-end w-100 gap-4">
         <div className="d-flex justify-content-end mt-4">
-          <Link className="btn btn-outline-primary me-2" to={"/users"}>
+          <Link className="btn btn-outline-primary me-2" to={"/requests"}>
             Cancel
           </Link>
           <button className="btn btn-primary">
             <svg className="bi pe-none me-2" width={16} height={16} fill="#FFFFFF">
               <use xlinkHref={`${bootstrapIcons}#save`} />
             </svg>
-            Save user
+            Save request
           </button>
         </div>
       </div>

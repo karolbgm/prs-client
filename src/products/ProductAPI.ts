@@ -5,26 +5,26 @@ import {
     parseJSON,
   } from "../utility/fetchUtilities";
 
-import { User } from "./User";
+import { Product } from "./Product";
 
-let url = `${BASE_URL}/users`;
+let url = `${BASE_URL}/products`;
 
-export const userAPI = {
-    list(): Promise<User[]> {
+export const productAPI = {
+    list(): Promise<Product[]> {
       return fetch(`${url}?_sort=name&_order=asc`)
         .then(delay(600))
         .then(checkStatus)
         .then(parseJSON);
     },
   
-    find(id: number): Promise<User> {
+    find(id: number): Promise<Product> {
       return fetch(`${url}/${id}`).then(checkStatus).then(parseJSON);
     },
   
-    post(user: User) {
+    post(product: Product) {
       return fetch(`${url}`, {
         method: "POST",
-        body: JSON.stringify(user),
+        body: JSON.stringify(product),
         headers: {
           "Content-Type": "application/json",
         },
@@ -33,10 +33,10 @@ export const userAPI = {
         .then(parseJSON);
     },
   
-    put(user: User) {
-      return fetch(`${url}/${user.id}`, {
+    put(product: Product) {
+      return fetch(`${url}/${product.id}`, {
         method: "PUT",
-        body: JSON.stringify(user),
+        body: JSON.stringify(product),
         headers: {
           "Content-Type": "application/json",
         },

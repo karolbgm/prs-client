@@ -1,6 +1,6 @@
-export class User {
+export class Request {
     id: number | undefined;
-    username = "";
+    requestname = "";
     password = "";
     firstname = "";
     lastname = "";
@@ -16,7 +16,7 @@ export class User {
     constructor(initializer?: any) {
         if (!initializer) return;
         if (initializer.id) this.id = initializer.id;
-        if (initializer.username) this.username = initializer.username;
+        if (initializer.requestname) this.requestname = initializer.requestname;
         if (initializer.password) this.password = initializer.password;
         if (initializer.firstname) this.firstname = initializer.firstname;
         if (initializer.lastname) this.lastname = initializer.lastname;
