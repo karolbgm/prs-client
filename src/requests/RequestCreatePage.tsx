@@ -1,4 +1,5 @@
 import RequestForm from "./RequestForm";
+
 export default function RequestCreatePage() {
   return (
     <>
@@ -6,7 +7,7 @@ export default function RequestCreatePage() {
         <h2>New Request</h2>
       </header>
 
-      <section className="d-flex bg-light gap-5 p-4 rounded-4 flex-wrap">
+      <section className="bg-light gap-5 p-4 rounded-4">
         <RequestForm />
       </section>
     </>

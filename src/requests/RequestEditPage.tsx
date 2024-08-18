@@ -7,7 +7,7 @@ export default function RequestEditPage() {
         <h2>Edit Request</h2>
       </header>
 
-      <section className="d-flex bg-light gap-5 p-4 rounded-4 flex-wrap">
+      <section className="bg-light gap-5 p-4 rounded-4">
         <RequestForm />
       </section>
     </>

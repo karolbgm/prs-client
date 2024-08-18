@@ -34,18 +34,45 @@ export default function RequestList() {
   }
 
   return (
-    <section className="list d-flex flex-row flex-wrap bg-light gap-5 p-4 rounded-4">
-      {busy && (
-        <div className="d-flex justify-content-center align-items-center w-100 vh-100">
-          <div className="spinner-border" role="status">
-            <span className="visually-hidden">Loading...</span>
+    <>
+      <div className="d-flex flex-column mb-4 w-25">
+        <label htmlFor="status" className="form-label">
+          Status
+        </label>
+        <select id="status" className="form-select">
+          <option value="">All</option>
+          <option value="NEW">New</option>
+          <option value="REVIEW">Pending Review</option>
+          <option value="APPROVED">Approved</option>
+        </select>
+      </div>
+      <section className="list d-flex flex-row flex-wrap bg-light gap-5 p-4 rounded-4">
+        {busy && (
+          <div className="d-flex justify-content-center align-items-center w-100 vh-100">
+            <div className="spinner-border" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
           </div>
-        </div>
-      )}
+        )}
 
-      {requests.map((request) => (
-        <RequestCard key={request.id} request={request} onRemove={remove} />
-      ))}
-    </section>
+        <table className="table table-hover w-75 table rounded-4">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Description</th>
+              <th scope="col">Status</th>
+              <th scope="col">Total</th>
+              <th scope="col">Requested By</th>
+              <th />
+            </tr>
+          </thead>
+          <tbody>
+            {requests.map((request) => (
+              <RequestCard key={request.id} request={request} onRemove={remove} />
+            ))}
+          </tbody>
+        </table>
+      </section>
+    </>
   );
 }

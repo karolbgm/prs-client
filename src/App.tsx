@@ -17,6 +17,8 @@ import ProductsPage from "./products/ProductsPage";
 import ProductCreatePage from "./products/ProductCreatePage";
 import ProductEditPage from "./products/ProductEditPage";
 import RequestsPage from "./requests/RequestsPage";
+import RequestCreatePage from "./requests/RequestCreatePage";
+import RequestEditPage from "./requests/RequestEditPage";
 
 function App() {
   return (
@@ -42,17 +44,21 @@ function App() {
             <Routes>
               <Route path="/" element={<IndexPage />} />
               <Route path="/vendors" element={<VendorsPage />} />
-              <Route path="/requests" element={<RequestsPage />} />
               <Route path="/users" element={<UsersPage />} />
               <Route path="/products" element={<ProductsPage />} />
-              <Route path="/products/create" element={<ProductCreatePage />} />
-              <Route path="/products/edit/:id" element={<ProductEditPage />} />
-
+              <Route path="/requests" element={<RequestsPage />} />
               <Route path="/requestlines" element={<RequestlinesPage />} />
+
               <Route path="/vendors/create" element={<VendorCreatePage />} />
-              <Route path="/vendors/edit/:id" element={<VendorEditPage />} />
               <Route path="/users/create" element={<UserCreatePage />} />
+              <Route path="/products/create" element={<ProductCreatePage />} />
+              <Route path="/requests/create" element={<RequestCreatePage />} />
+
+              <Route path="/vendors/edit/:id" element={<VendorEditPage />} />
               <Route path="/users/edit/:id" element={<UserEditPage />} />
+              <Route path="/products/edit/:id" element={<ProductEditPage />} />
+              <Route path="/requests/edit/:id" element={<RequestEditPage />} />
+
               {/* <Route path="/requests/detail/:requestId/*" element={} /> */}
             </Routes>
           </section>

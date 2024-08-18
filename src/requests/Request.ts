@@ -1,13 +1,13 @@
 export class Request {
     id: number | undefined;
-    requestname = "";
-    password = "";
-    firstname = "";
-    lastname = "";
-    phone: string | null = null;
-    email: string | null = null;
-    isReviewer = false;
-    isAdmin = false;
+    description = "";
+    justification = "";
+    rejectionReason = "";
+    deliveryMode = "";
+    status = "NEW";
+    total: number = 0;
+    userId: number = 0;
+
     
     get isNew(): boolean {
         return this.id === undefined;
@@ -16,13 +16,12 @@ export class Request {
     constructor(initializer?: any) {
         if (!initializer) return;
         if (initializer.id) this.id = initializer.id;
-        if (initializer.requestname) this.requestname = initializer.requestname;
-        if (initializer.password) this.password = initializer.password;
-        if (initializer.firstname) this.firstname = initializer.firstname;
-        if (initializer.lastname) this.lastname = initializer.lastname;
-        if (initializer.phone) this.phone = initializer.phone;
-        if (initializer.email) this.email = initializer.email;
-        if (initializer.isReviewer) this.isReviewer = initializer.isReviewer;
-        if (initializer.isAdmin) this.isAdmin = initializer.isAdmin;
+        if (initializer.description) this.description = initializer.description;
+        if (initializer.justification) this.justification = initializer.justification;
+        if (initializer.rejectionReason) this.rejectionReason = initializer.rejectionReason;
+        if (initializer.deliveryMode) this.deliveryMode = initializer.deliveryMode;
+        if (initializer.status) this.status = initializer.status;
+        if (initializer.total) this.total = initializer.total;
+        if (initializer.userId) this.userId = initializer.userId;
       }
 }
