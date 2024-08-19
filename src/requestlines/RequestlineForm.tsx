@@ -77,10 +77,11 @@ function RequestlineForm() {
           {...register("quantity", {
             required: "Quantity is required",
           })}
-          className="form-control"
+          className={`form-control ${errors.quantity && "is-invalid"} `}
           type="text"
           id="quantity"
         />
+        <div className="invalid-feedback">{errors?.quantity?.message}</div>
       </div>
 
       <div className="d-flex gap-2">
@@ -88,7 +89,6 @@ function RequestlineForm() {
         <Link className="btn btn-outline-secondary" to={`/requests/detail/${requestId}`}>
           Cancel
         </Link>
-        
       </div>
     </form>
   );

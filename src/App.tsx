@@ -21,53 +21,73 @@ import RequestEditPage from "./requests/RequestEditPage";
 import RequestDetailPage from "./requests/RequestDetailPage";
 import RequestlineCreatePage from "./requestlines/RequestlineCreatePage";
 import RequestlineEditPage from "./requestlines/RequestlineEditPage";
+import SignInPage from "./account/SignInPage";
+import { useState } from "react";
+import { User } from "./users/User";
+import { UserContext } from "./users/UserContext";
+
+function getPersistedUser() {
+  const userAsJSON = localStorage.getItem("user");
+  if (!userAsJSON) return undefined;
+  const user = JSON.parse(userAsJSON);
+  return user;
+}
 
 function App() {
+  const [user, setUser] = useState<User | undefined>(getPersistedUser());
+
   return (
     <Router>
-      <div>
-        <Header />
-        <main className="d-flex">
-          <Toaster
-            toastOptions={{
-              success: {
-                iconTheme: {
-                  primary: "#0d6efd",
-                  secondary: "white",
+      <UserContext.Provider value={{ user, setUser }}>
+        <div>
+          <Header />
+          <main className="d-flex">
+            <Toaster
+              toastOptions={{
+                success: {
+                  iconTheme: {
+                    primary: "#0d6efd",
+                    secondary: "white",
+                  },
                 },
-              },
-              style: {
-                maxWidth: 500,
-              },
-            }}
-          />
-          <NavPanel />
-          <section className="content container-fluid mx-5 my-2 py-4">
-            <Routes>
-              <Route path="/" element={<IndexPage />} />
-              <Route path="/vendors" element={<VendorsPage />} />
-              <Route path="/vendors/create" element={<VendorCreatePage />} />
-              <Route path="/vendors/edit/:id" element={<VendorEditPage />} />
+                style: {
+                  maxWidth: 500,
+                },
+              }}
+            />
+            <NavPanel />
+            <section className="content container-fluid mx-5 my-2 py-4">
+              <Routes>
+                <Route path="/" element={<IndexPage />} />
+                <Route path="/signin" element={<SignInPage />} />
 
-              <Route path="/users" element={<UsersPage />} />
-              <Route path="/users/edit/:id" element={<UserEditPage />} />
-              <Route path="/users/create" element={<UserCreatePage />} />
+                <Route path="/vendors" element={<VendorsPage />} />
+                <Route path="/vendors/create" element={<VendorCreatePage />} />
+                <Route path="/vendors/edit/:id" element={<VendorEditPage />} />
 
-              <Route path="/products" element={<ProductsPage />} />
-              <Route path="/products/edit/:id" element={<ProductEditPage />} />
-              <Route path="/products/create" element={<ProductCreatePage />} />
+                <Route path="/users" element={<UsersPage />} />
+                <Route path="/users/edit/:id" element={<UserEditPage />} />
+                <Route path="/users/create" element={<UserCreatePage />} />
 
-              <Route path="/requests" element={<RequestsPage />} />
-              <Route path="/requests/edit/:id" element={<RequestEditPage />} />
-              <Route path="/requests/create" element={<RequestCreatePage />} />
-              <Route path="/requests/detail/:requestId/*" element={<RequestDetailPage />} />
+                <Route path="/products" element={<ProductsPage />} />
+                <Route path="/products/edit/:id" element={<ProductEditPage />} />
+                <Route path="/products/create" element={<ProductCreatePage />} />
 
-              <Route path="/requests/detail/:requestId/requestline/create" element={<RequestlineCreatePage />} />
-              <Route path="/requests/detail/:requestId/requestline/edit/:requestlineId" element={<RequestlineEditPage />} />
-            </Routes>
-          </section>
-        </main>
-      </div>
+                <Route path="/requests" element={<RequestsPage />} />
+                <Route path="/requests/edit/:id" element={<RequestEditPage />} />
+                <Route path="/requests/create" element={<RequestCreatePage />} />
+                <Route path="/requests/detail/:requestId/*" element={<RequestDetailPage />} />
+
+                <Route path="/requests/detail/:requestId/requestline/create" element={<RequestlineCreatePage />} />
+                <Route
+                  path="/requests/detail/:requestId/requestline/edit/:requestlineId"
+                  element={<RequestlineEditPage />}
+                />
+              </Routes>
+            </section>
+          </main>
+        </div>
+      </UserContext.Provider>
     </Router>
   );
 }

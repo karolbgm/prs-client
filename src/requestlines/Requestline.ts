@@ -2,7 +2,7 @@ import { Product } from "../products/Product";
 
 export class Requestline {
   id: number | undefined;
-  quantity: number = 0;
+  quantity: number | undefined;
   requestId: number | undefined;
   productId: number | undefined;
   product: Product | undefined;

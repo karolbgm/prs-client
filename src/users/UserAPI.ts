@@ -10,6 +10,14 @@ import { User } from "./User";
 let url = `${BASE_URL}/users`;
 
 export const userAPI = {
+  findByAccount(username: string, password: string): Promise<User> {
+    return (
+      fetch(`${url}/${username}/${password}`)
+        .then(checkStatus)
+        .then(parseJSON)
+        
+    );
+  },
     list(): Promise<User[]> {
       return fetch(`${url}?_sort=name&_order=asc`)
         .then(delay(600))

@@ -1,8 +1,18 @@
 import bootstrapIcons from "bootstrap-icons/bootstrap-icons.svg";
 import { Dropdown } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useUserContext } from "./users/UserContext";
 
 export default function Header() {
+  const { user, setUser } = useUserContext();
+  const navigate = useNavigate();
+
+  function signout() {
+    localStorage.removeItem("user");
+    setUser(undefined);
+    navigate("/signin");
+  }
+
   return (
     <header>
       <div className="navbar bg-body-tertiary py-4 border-bottom">
@@ -21,24 +31,40 @@ export default function Header() {
             </svg>
             <span className="small mx-2 fw-semibold">Purchase Request System</span>
           </Link>
-          <Link className="btn btn-primary me-2" to="/login">
-            <svg width={16} height={16} fill="currentColor" className="bi bi-person me-2">
-              <use xlinkHref={`${bootstrapIcons}#person`} />
-            </svg>
-            Sign in
-          </Link>
-          <Dropdown>
-            <Dropdown.Toggle variant="" id="dropdown-basic">
-              <strong>Karol Morgan</strong>
-            </Dropdown.Toggle>
 
-            <Dropdown.Menu>
-              <Dropdown.Item href="">Settings</Dropdown.Item>
-              <Dropdown.Item>Profile</Dropdown.Item>
-              <Dropdown.Divider />
-              <Dropdown.Item href="">Sign out</Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
+          {user?.id ? (
+            <Dropdown>
+              <Dropdown.Toggle variant="" id="dropdown-basic" className="no-arrow">
+                <div className="d-flex">
+                  <span
+                    style={{ width: "2.5rem", height: "2.5rem" }}
+                    className="d-flex  bg-primary-subtle fs-5 text-secondary align-items-center justify-content-center rounded-circle me-2"
+                  >
+                    {user.firstname[0].toUpperCase()}
+                    {user.lastname[0].toUpperCase()}
+                  </span>
+                  <span className="mt-2">
+                    {" "}
+                    {user?.firstname} {user?.lastname}
+                  </span>
+                </div>
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu>
+                <Dropdown.Item href="">Settings</Dropdown.Item>
+                <Dropdown.Item>Profile</Dropdown.Item>
+                <Dropdown.Divider />
+                <Dropdown.Item onClick={signout}>Sign out</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+          ) : (
+            <Link className="btn btn-primary me-2" to="/signin">
+              <svg width={16} height={16} fill="currentColor" className="bi bi-person me-2">
+                <use xlinkHref={`${bootstrapIcons}#person`} />
+              </svg>
+              Sign in
+            </Link>
+          )}
         </div>
       </div>
     </header>
