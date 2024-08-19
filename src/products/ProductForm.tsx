@@ -5,25 +5,12 @@ import { Product } from "./Product";
 import toast from "react-hot-toast";
 import { productAPI } from "./ProductAPI";
 import { Vendor } from "../vendors/Vendor";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { vendorAPI } from "../vendors/VendorAPI";
 
 export default function ProductForm() {
   //LOADING ALL VENDORS
   const [vendors, setVendors] = useState<Vendor[]>([]);
-  const [busy, setBusy] = useState(false);
-
-  async function loadVendors() {
-    setBusy(true);
-    let data = await vendorAPI.list();
-    setVendors(data);
-    setBusy(false);
-  }
-
-  useEffect(() => {
-    loadVendors();
-  }, []);
-  //-----------------------------------------
 
   //we will navigate back to the main page when save
   const navigate = useNavigate();
@@ -38,6 +25,9 @@ export default function ProductForm() {
     formState: { errors },
   } = useForm<Product>({
     defaultValues: async () => {
+      let data = await vendorAPI.list();
+      setVendors(data);
+
       if (!productId) {
         return Promise.resolve(new Product());
       } else {

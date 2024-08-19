@@ -1,3 +1,6 @@
+import { Requestline } from "../requestlines/Requestline";
+import { User } from "../users/User";
+
 export class Request {
     id: number | undefined;
     description = "";
@@ -7,6 +10,8 @@ export class Request {
     status = "NEW";
     total: number = 0;
     userId: number = 3; //HARD CODED 
+    user: User | undefined; //do I need this here?
+    requestLines: Requestline[] | undefined;
 
     
     get isNew(): boolean {
@@ -23,5 +28,7 @@ export class Request {
         if (initializer.status) this.status = initializer.status;
         if (initializer.total) this.total = initializer.total;
         if (initializer.userId) this.userId = initializer.userId;
+        if (initializer.user) this.user = initializer.user;
+        if (initializer.requestLines) this.requestLines = initializer.requestLines;
       }
 }

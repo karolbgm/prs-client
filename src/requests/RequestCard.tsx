@@ -1,9 +1,9 @@
 import bootstrapIcons from "bootstrap-icons/bootstrap-icons.svg";
 import { Request } from "./Request";
 import Dropdown from "react-bootstrap/Dropdown";
-import { SyntheticEvent, useEffect, useState } from "react";
-import { userAPI } from "../users/UserAPI";
-import { User } from "../users/User";
+import { SyntheticEvent } from "react";
+// import { userAPI } from "../users/UserAPI";
+// import { User } from "../users/User";
 
 interface RequestCardProps {
   request: Request;
@@ -11,19 +11,37 @@ interface RequestCardProps {
 }
 
 export default function RequestCard({ request, onRemove }: RequestCardProps) {
-  const [user, setUser] = useState<User>();
-  const [busy, setBusy] = useState(false);
+  // const [user, setUser] = useState<User>();
+  // const [busy, setBusy] = useState(false);
 
-  async function loadUser() {
-    setBusy(true);
-    let data = await userAPI.find(request.userId);
-    setUser(data);
-    setBusy(false);
+  // async function loadUser() {
+  //   setBusy(true);
+  //   let data = await userAPI.find(request.userId);
+  //   setUser(data);
+  //   setBusy(false);
+  // }
+
+  // useEffect(() => {
+  //   loadUser();
+  // }, []);
+
+  //Changing badge color
+  function badgeType(request: Request) {
+    let badgeInfo;
+    if(request.status === "NEW") {
+     badgeInfo = "text-bg-primary"
+    } else if (request.status === "APPROVED") {
+      badgeInfo = "text-bg-success"
+
+    } else if (request.status === "REJECTED") {
+      badgeInfo = "text-bg-danger"
+
+    } else if (request.status === "REVIEW") {
+      badgeInfo = "text-bg-warning"
+
+    }
+    return badgeInfo;
   }
-
-  useEffect(() => {
-    loadUser();
-  }, []);
 
   return (
     <>
@@ -35,7 +53,7 @@ export default function RequestCard({ request, onRemove }: RequestCardProps) {
         </td>
 
         <td>
-          <span
+          {/* <span
             className={`badge ${request.status === "NEW" && "text-bg-primary"} ${
               request.status === "REJECTED" && "text-bg-danger"
             } ${request.status === "APPROVED" && "text-bg-success"} ${
@@ -43,11 +61,16 @@ export default function RequestCard({ request, onRemove }: RequestCardProps) {
             }`}
           >
             {request.status}
+          </span> */}
+          <span
+            className={`badge ${badgeType(request)}`}
+          >
+            {request.status}
           </span>
         </td>
         <td>${request.total}</td>
         <td>
-          {user?.firstname} {user?.lastname}
+          {request.user?.firstname} {request.user?.lastname}
           <br />
           <span className="text-body-secondary small text-wrap">{request.deliveryMode}</span>
         </td>

@@ -1,14 +1,12 @@
 import bootstrapIcons from "bootstrap-icons/bootstrap-icons.svg";
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
-import { Link, Route, Routes, useParams, useSearchParams } from "react-router-dom";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 import { Request } from "./Request";
 import { requestAPI } from "./RequestAPI";
-// import CreditTable from "../credits/CreditTable";
-// import { creditAPI } from "../credits/CreditAPI";
-// import { Credit } from "../credits/Credit";
-// import CreditCreatePage from "../credits/CreditCreatePage";
-// import CreditEditPage from "../credits/CreditEditPage";
+import RequestlinesTable from "../requestlines/RequestlinesTable";
+import { Requestline } from "../requestlines/Requestline";
+import { requestlineAPI } from "../requestlines/RequestlineAPI";
 
 export default function RequestDetailPage() {
   const { requestId: requestIdAsString } = useParams<{
@@ -37,18 +35,18 @@ export default function RequestDetailPage() {
     loadRequest();
   }, [searchParams.get("lastUpdated")]);
 
-  //   async function removeCredit(credit: Credit) {
-  //     if (confirm("Are you sure you want to delete this Request?")) {
-  //       if (credit.id) {
-  //         await creditAPI.delete(credit.id);
-  //         toast.success("Successfully deleted.");
-  //         let updatedCredits = request?.credits?.filter((c) => c.id !== credit.id);
-  //         if (request) {
-  //           setRequest({ ...request, credits: updatedCredits } as Request);
-  //         }
-  //       }
-  //     }
-  //   }
+  async function removeRequestline(requestline: Requestline) {
+    if (confirm("Are you sure you want to delete this Request?")) {
+      if (requestline.id) {
+        await requestlineAPI.delete(requestline.id);
+        toast.success("Successfully deleted.");
+        let updatedRequestlines = request?.requestLines?.filter((c) => c.id !== requestline.id);
+        if (request) {
+          setRequest({ ...request, requestLines: updatedRequestlines } as Request);
+        }
+      }
+    }
+  }
 
   if (!request) return null;
 
@@ -57,17 +55,17 @@ export default function RequestDetailPage() {
       <header className="d-flex justify-content-between pb-4 mb-4 border-bottom border-2">
         <h2>Requests</h2>
         <div>
-        <Link to="/" className="btn btn-primary">
-          <svg className="bi pe-none me-2" width={16} height={16} fill="#FFFFFF">
-            <use xlinkHref={`${bootstrapIcons}#person-check`} />
-          </svg>
-          Send for Review
-        </Link>
-        <Link to={`/requests/edit/${request.id}`} className="ms-3">
-          <svg className="bi pe-none me-2" width={16} height={16} fill="currentColor">
-            <use xlinkHref={`${bootstrapIcons}#pencil`} />
-          </svg>
-        </Link>
+          <Link to="/" className="btn btn-primary">
+            <svg className="bi pe-none me-2" width={16} height={16} fill="#FFFFFF">
+              <use xlinkHref={`${bootstrapIcons}#person-check`} />
+            </svg>
+            Send for Review
+          </Link>
+          <Link to={`/requests/edit/${request.id}`} className="ms-3">
+            <svg className="bi pe-none me-2" width={16} height={16} fill="currentColor">
+              <use xlinkHref={`${bootstrapIcons}#pencil`} />
+            </svg>
+          </Link>
         </div>
       </header>
       {busy && (
@@ -89,18 +87,38 @@ export default function RequestDetailPage() {
             <dt>Delivery Method</dt>
             <dd>{request.deliveryMode}</dd>
             <dt>Status</dt>
-            <dd className={`badge ${request.status === "NEW" && "text-bg-primary"} ${
-              request.status === "REJECTED" && "text-bg-danger"
-            } ${request.status === "APPROVED" && "text-bg-success"} ${
-              request.status === "REVIEW" && "text-bg-warning"
-            }`}>{request.status}</dd>
+            <dd
+              className={`badge ${request.status === "NEW" && "text-bg-primary"} ${
+                request.status === "REJECTED" && "text-bg-danger"
+              } ${request.status === "APPROVED" && "text-bg-success"} ${
+                request.status === "REVIEW" && "text-bg-warning"
+              }`}
+            >
+              {request.status}
+            </dd>
           </dl>
           <dl>
             <dt>Requested By</dt>
-            <dd>{request.userId}</dd>
+            <dd>
+              {request.user?.firstname} {request.user?.lastname}
+            </dd>
           </dl>
         </section>
       )}
+
+      <section className="card p-4 mt-4 w-100">
+        <header className="d-flex justify-content-between">
+          <h5>Items</h5>
+
+          <Link className="btn btn-outline-primary" to={`/requests/detail/${request.id}/requestline/create`}>
+            <svg className="bi pe-none me-2" width={16} height={16} fill="currentColor">
+              <use xlinkHref={`${bootstrapIcons}#plus-circle`} />
+            </svg>
+            Add requestline
+          </Link>
+        </header>
+        <RequestlinesTable request={request} onRemove={removeRequestline} />
+      </section>
     </>
   );
 }

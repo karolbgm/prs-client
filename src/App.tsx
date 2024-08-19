@@ -2,10 +2,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import Header from "./Header";
 import NavPanel from "./NavPanel";
-import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import IndexPage from "./IndexPage";
 import VendorsPage from "./vendors/VendorsPage";
-import RequestlinesPage from "./requestlines/RequestlinesPage";
 
 import VendorCreatePage from "./vendors/VendorCreatePage";
 import VendorEditPage from "./vendors/VendorEditPage";
@@ -20,6 +19,8 @@ import RequestsPage from "./requests/RequestsPage";
 import RequestCreatePage from "./requests/RequestCreatePage";
 import RequestEditPage from "./requests/RequestEditPage";
 import RequestDetailPage from "./requests/RequestDetailPage";
+import RequestlineCreatePage from "./requestlines/RequestlineCreatePage";
+import RequestlineEditPage from "./requestlines/RequestlineEditPage";
 
 function App() {
   return (
@@ -27,7 +28,7 @@ function App() {
       <div>
         <Header />
         <main className="d-flex">
-        <Toaster
+          <Toaster
             toastOptions={{
               success: {
                 iconTheme: {
@@ -61,8 +62,8 @@ function App() {
               <Route path="/requests/create" element={<RequestCreatePage />} />
               <Route path="/requests/detail/:requestId/*" element={<RequestDetailPage />} />
 
-              <Route path="/requestlines" element={<RequestlinesPage />} />
-
+              <Route path="/requests/detail/:requestId/requestline/create" element={<RequestlineCreatePage />} />
+              <Route path="/requests/detail/:requestId/requestline/edit/:requestlineId" element={<RequestlineEditPage />} />
             </Routes>
           </section>
         </main>
