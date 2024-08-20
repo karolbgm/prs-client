@@ -9,7 +9,8 @@ export class Request {
     deliveryMode = "";
     status = "NEW";
     total: number = 0;
-    userId: number = 3; //HARD CODED 
+    // userId: number = 3; //HARD CODED 
+    userId: number | undefined; 
     user: User | undefined; //do I need this here?
     requestLines: Requestline[] | undefined;
 

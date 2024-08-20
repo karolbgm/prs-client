@@ -7,9 +7,15 @@ import { requestAPI } from "./RequestAPI";
 import { useState } from "react";
 import { userAPI } from "../users/UserAPI";
 import { User } from "../users/User";
+import { useUserContext } from "../users/UserContext";
 
 export default function RequestForm() {
   const [isDisabled, setIsDisabled] = useState(true);
+
+  const { user, setUser } = useUserContext();
+
+
+
   const [users, setUsers] = useState<User[]>([]);
   //we will navigate back to the main page when save
   const navigate = useNavigate();
@@ -27,7 +33,7 @@ export default function RequestForm() {
       let data = await userAPI.list();
       setUsers(data);
       if (!requestId) {
-        return Promise.resolve(new Request());
+        return Promise.resolve(new Request({userId: user?.id}));
       } else {
         setIsDisabled(false);
         return await requestAPI.find(requestId);
@@ -122,12 +128,13 @@ export default function RequestForm() {
           <div className="mb-3">
             <label htmlFor="user">Requested By</label>
             <select id="user" className="form-select" {...register("userId")} disabled>
-              {users.map((u) => (
+              {users.map((u) =>  (
                 <option key={u.id} value={u.id}>
                   {u.firstname} {u.lastname}
                 </option>
               ))}
             </select>
+            
           </div>
         </div>
       </div>

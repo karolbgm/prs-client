@@ -25,6 +25,7 @@ import SignInPage from "./account/SignInPage";
 import { useState } from "react";
 import { User } from "./users/User";
 import { UserContext } from "./users/UserContext";
+import Layout from "./Layout";
 
 function getPersistedUser() {
   const userAsJSON = localStorage.getItem("user");
@@ -39,54 +40,35 @@ function App() {
   return (
     <Router>
       <UserContext.Provider value={{ user, setUser }}>
-        <div>
-          <Header />
-          <main className="d-flex">
-            <Toaster
-              toastOptions={{
-                success: {
-                  iconTheme: {
-                    primary: "#0d6efd",
-                    secondary: "white",
-                  },
-                },
-                style: {
-                  maxWidth: 500,
-                },
-              }}
+        <Routes>
+          <Route path="/signin" element={<SignInPage />} />
+          <Route element={<Layout />}>
+            <Route path="/" element={<IndexPage />} />
+
+            <Route path="/vendors" element={<VendorsPage />} />
+            <Route path="/vendors/create" element={<VendorCreatePage />} />
+            <Route path="/vendors/edit/:id" element={<VendorEditPage />} />
+
+            <Route path="/users" element={<UsersPage />} />
+            <Route path="/users/edit/:id" element={<UserEditPage />} />
+            <Route path="/users/create" element={<UserCreatePage />} />
+
+            <Route path="/products" element={<ProductsPage />} />
+            <Route path="/products/edit/:id" element={<ProductEditPage />} />
+            <Route path="/products/create" element={<ProductCreatePage />} />
+
+            <Route path="/requests" element={<RequestsPage />} />
+            <Route path="/requests/edit/:id" element={<RequestEditPage />} />
+            <Route path="/requests/create" element={<RequestCreatePage />} />
+            <Route path="/requests/detail/:requestId/*" element={<RequestDetailPage />} />
+
+            <Route path="/requests/detail/:requestId/requestline/create" element={<RequestlineCreatePage />} />
+            <Route
+              path="/requests/detail/:requestId/requestline/edit/:requestlineId"
+              element={<RequestlineEditPage />}
             />
-            <NavPanel />
-            <section className="content container-fluid mx-5 my-2 py-4">
-              <Routes>
-                <Route path="/" element={<IndexPage />} />
-                <Route path="/signin" element={<SignInPage />} />
-
-                <Route path="/vendors" element={<VendorsPage />} />
-                <Route path="/vendors/create" element={<VendorCreatePage />} />
-                <Route path="/vendors/edit/:id" element={<VendorEditPage />} />
-
-                <Route path="/users" element={<UsersPage />} />
-                <Route path="/users/edit/:id" element={<UserEditPage />} />
-                <Route path="/users/create" element={<UserCreatePage />} />
-
-                <Route path="/products" element={<ProductsPage />} />
-                <Route path="/products/edit/:id" element={<ProductEditPage />} />
-                <Route path="/products/create" element={<ProductCreatePage />} />
-
-                <Route path="/requests" element={<RequestsPage />} />
-                <Route path="/requests/edit/:id" element={<RequestEditPage />} />
-                <Route path="/requests/create" element={<RequestCreatePage />} />
-                <Route path="/requests/detail/:requestId/*" element={<RequestDetailPage />} />
-
-                <Route path="/requests/detail/:requestId/requestline/create" element={<RequestlineCreatePage />} />
-                <Route
-                  path="/requests/detail/:requestId/requestline/edit/:requestlineId"
-                  element={<RequestlineEditPage />}
-                />
-              </Routes>
-            </section>
-          </main>
-        </div>
+          </Route>
+        </Routes>
       </UserContext.Provider>
     </Router>
   );

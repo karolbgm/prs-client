@@ -1,14 +1,18 @@
 import bootstrapIcons from "bootstrap-icons/bootstrap-icons.svg";
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
-import { Link, useParams, useSearchParams } from "react-router-dom";
+import { Link, useParams, useSearchParams, useNavigate } from "react-router-dom";
 import { Request } from "./Request";
 import { requestAPI } from "./RequestAPI";
 import RequestlinesTable from "../requestlines/RequestlinesTable";
 import { Requestline } from "../requestlines/Requestline";
 import { requestlineAPI } from "../requestlines/RequestlineAPI";
+import { useUserContext } from "../users/UserContext";
 
 export default function RequestDetailPage() {
+  const { user, setUser } = useUserContext();
+  // const [isDisabled, setIsDisabled] = useState(false);
+
   const { requestId: requestIdAsString } = useParams<{
     requestId: string;
   }>();
@@ -21,7 +25,6 @@ export default function RequestDetailPage() {
     try {
       if (!requestId) return;
       setBusy(true);
-      //   const data = await requestAPI.findWithDetails(requestId);
       const data = await requestAPI.find(requestId);
       setRequest(data);
     } catch (error: any) {
@@ -47,25 +50,86 @@ export default function RequestDetailPage() {
       }
     }
   }
+  function isDisabled() {
+    if (user?.id === request?.userId) {
+      return true;
+    }
+  }
+
+  const navigate = useNavigate();
+
+  //REVIEW
+  async function sendToReview() {
+    if (request) {
+      await requestAPI.review(request);
+      navigate("/requests");
+    }
+  }
+
+  //APPROVE
+  async function approveRequest() {
+    if (request) {
+      await requestAPI.approve(request);
+      navigate("/requests");
+    }
+  }
+  //REJECT
+  async function rejectRequest() {
+    if (request) {
+      await requestAPI.reject(request);
+      navigate("/requests");
+    }
+  }
 
   if (!request) return null;
 
   return (
     <>
+      {isDisabled() && request.status === "REVIEW" ? (
+        <div className="alert alert-warning" role="alert">
+          You're not allowed to review your own requests.
+        </div>
+      ) : ""}
       <header className="d-flex justify-content-between pb-4 mb-4 border-bottom border-2">
         <h2>Requests</h2>
-        <div>
-          <Link to="/" className="btn btn-primary">
-            <svg className="bi pe-none me-2" width={16} height={16} fill="#FFFFFF">
-              <use xlinkHref={`${bootstrapIcons}#person-check`} />
-            </svg>
-            Send for Review
-          </Link>
-          <Link to={`/requests/edit/${request.id}`} className="ms-3">
-            <svg className="bi pe-none me-2" width={16} height={16} fill="currentColor">
-              <use xlinkHref={`${bootstrapIcons}#pencil`} />
-            </svg>
-          </Link>
+        <div className="d-flex">
+          <div>
+            {request.status !== "REVIEW" && (
+              <button onClick={sendToReview} className="btn btn-primary me-2">
+                <svg className="bi pe-none me-2" width={16} height={16} fill="#FFFFFF">
+                  <use xlinkHref={`${bootstrapIcons}#person-check`} />
+                </svg>
+                Send for Review
+              </button>
+            )}
+
+            {request?.status === "REVIEW" ? (
+              <div>
+                <button onClick={approveRequest} className="btn btn-primary me-2" disabled={isDisabled()}>
+                  <svg className="bi pe-none me-2" width={16} height={16} fill="#FFFFFF">
+                    <use xlinkHref={`${bootstrapIcons}#hand-thumbs-up`} />
+                  </svg>
+                  Approve
+                </button>
+                <button onClick={rejectRequest} className="btn btn-outline-danger" disabled={isDisabled()}>
+                  <svg className="bi pe-none me-2" width={16} height={16} fill="currentColor">
+                    <use xlinkHref={`${bootstrapIcons}#hand-thumbs-down`} />
+                  </svg>
+                  Reject
+                </button>
+              </div>
+            ) : (
+              ""
+            )}
+          </div>
+
+          <div className="mt-2">
+            <Link to={`/requests/edit/${request.id}`} className="ms-3">
+              <svg className="bi pe-none me-2" width={16} height={16} fill="currentColor">
+                <use xlinkHref={`${bootstrapIcons}#pencil`} />
+              </svg>
+            </Link>
+          </div>
         </div>
       </header>
       {busy && (

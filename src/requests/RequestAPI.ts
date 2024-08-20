@@ -10,6 +10,37 @@ import { Request } from "./Request";
 let url = `${BASE_URL}/requests`;
 
 export const requestAPI = {
+  review(request: Request) {
+    return fetch(`${url}/review/${request.id}`, {
+      method: "PUT",
+      body: JSON.stringify(request),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then(checkStatus);
+
+  },
+  approve(request: Request) {
+    return fetch(`${url}/approve/${request.id}`, {
+      method: "PUT",
+      body: JSON.stringify(request),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then(checkStatus);
+
+  },
+  reject(request: Request) {
+    return fetch(`${url}/reject/${request.id}`, {
+      method: "PUT",
+      body: JSON.stringify(request),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then(checkStatus);
+
+  },
+  
     list(): Promise<Request[]> {
       return fetch(`${url}?_sort=name&_order=asc`)
         .then(delay(600))

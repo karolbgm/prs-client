@@ -27,7 +27,8 @@ export default function RequestlinesTable({request, onRemove} : RequestlinesTabl
             <td>{requestline.product?.name}</td>
             <td>${requestline.product?.price}</td>
             <td>{requestline.quantity}</td>
-            <td>${(requestline.product?.price??0) * requestline.quantity} </td>
+            {/* this is a nullish operator: '??', in case it's null, it replaces with the following value */}
+            <td>${(requestline.product?.price??0) * (requestline.quantity ?? 0)} </td>
             
            
             <td className="d-flex gap-2">

@@ -4,7 +4,7 @@ export class Product {
     id: number | undefined;
     partNbr = "";
     name = "";
-    price: number = 0;
+    price: number | undefined;
     unit = "";
     photoPath: string | null = null;
     vendorId: number = 0;
