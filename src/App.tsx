@@ -38,6 +38,20 @@ function App() {
   const [user, setUser] = useState<User | undefined>(getPersistedUser());
 
   return (
+    <>
+    <Toaster
+    toastOptions={{
+      success: {
+        iconTheme: {
+          primary: "#0d6efd",
+          secondary: "white",
+        },
+      },
+      style: {
+        maxWidth: 500,
+      },
+    }}
+  />
     <Router>
       <UserContext.Provider value={{ user, setUser }}>
         <Routes>
@@ -71,7 +85,7 @@ function App() {
         </Routes>
       </UserContext.Provider>
     </Router>
-  );
+    </>);
 }
 
 export default App;
