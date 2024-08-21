@@ -2,8 +2,6 @@ import bootstrapIcons from "bootstrap-icons/bootstrap-icons.svg";
 import { Request } from "./Request";
 import Dropdown from "react-bootstrap/Dropdown";
 import { SyntheticEvent } from "react";
-// import { userAPI } from "../users/UserAPI";
-// import { User } from "../users/User";
 
 interface RequestCardProps {
   request: Request;
@@ -11,34 +9,17 @@ interface RequestCardProps {
 }
 
 export default function RequestCard({ request, onRemove }: RequestCardProps) {
-  // const [user, setUser] = useState<User>();
-  // const [busy, setBusy] = useState(false);
-
-  // async function loadUser() {
-  //   setBusy(true);
-  //   let data = await userAPI.find(request.userId);
-  //   setUser(data);
-  //   setBusy(false);
-  // }
-
-  // useEffect(() => {
-  //   loadUser();
-  // }, []);
-
   //Changing badge color
   function badgeType(request: Request) {
     let badgeInfo;
-    if(request.status === "NEW") {
-     badgeInfo = "text-bg-primary"
+    if (request.status === "NEW") {
+      badgeInfo = "text-bg-primary";
     } else if (request.status === "APPROVED") {
-      badgeInfo = "text-bg-success"
-
+      badgeInfo = "text-bg-success";
     } else if (request.status === "REJECTED") {
-      badgeInfo = "text-bg-danger"
-
+      badgeInfo = "text-bg-danger";
     } else if (request.status === "REVIEW") {
-      badgeInfo = "text-bg-warning"
-
+      badgeInfo = "text-bg-warning";
     }
     return badgeInfo;
   }
@@ -53,20 +34,7 @@ export default function RequestCard({ request, onRemove }: RequestCardProps) {
         </td>
 
         <td>
-          {/* <span
-            className={`badge ${request.status === "NEW" && "text-bg-primary"} ${
-              request.status === "REJECTED" && "text-bg-danger"
-            } ${request.status === "APPROVED" && "text-bg-success"} ${
-              request.status === "REVIEW" && "text-bg-warning"
-            }`}
-          >
-            {request.status}
-          </span> */}
-          <span
-            className={`badge ${badgeType(request)}`}
-          >
-            {request.status}
-          </span>
+          <span className={`badge ${badgeType(request)}`}>{request.status}</span>
         </td>
         <td>${request.total}</td>
         <td>

@@ -42,6 +42,8 @@ export const requestAPI = {
   },
   
     list(): Promise<Request[]> {
+      // let requestsUrl = `${url}`;
+      // if (status) requestsUrl += `/status/${status.toUpperCase()}`;
       return fetch(`${url}?_sort=name&_order=asc`)
         .then(delay(600))
         .then(checkStatus)

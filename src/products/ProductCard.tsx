@@ -27,7 +27,7 @@ export default function ProductCard({ product, onRemove }: ProductCardProps) {
           <div className="d-flex justify-content-between align-items-center">
             <span>
               {" "}
-              <strong>{product.name}</strong> 
+              <strong>{product.name}</strong>
             </span>
             <Dropdown>
               <Dropdown.Toggle variant="" id="dropdown-basic" className="no-arrow">
@@ -49,12 +49,16 @@ export default function ProductCard({ product, onRemove }: ProductCardProps) {
               </Dropdown.Menu>
             </Dropdown>
           </div>
-          <h6 className="card-subtitle mb-2">${product.price}/{product.unit}</h6>
+          <h6 className="card-subtitle mb-2">
+            ${product.price}/{product.unit}
+          </h6>
 
           <br />
           <span>{product.vendor?.name}</span>
           <br />
-          <Badge className="mt-2" bg="primary">{product.partNbr}</Badge>
+          <Badge className="mt-2" bg="primary">
+            {product.partNbr}
+          </Badge>
         </address>
       </div>
     </>

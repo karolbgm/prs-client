@@ -3,9 +3,10 @@ import { Vendor } from "./Vendor";
 import Dropdown from "react-bootstrap/Dropdown";
 import { SyntheticEvent } from "react";
 
+//props being passed from VendorList
 interface VendorCardProps {
   vendor: Vendor;
-  onRemove: (vendor: Vendor) => void;
+  onRemove: (vendor: Vendor) => void; 
 }
 
 export default function VendorCard({ vendor, onRemove }: VendorCardProps) {

@@ -8,16 +8,18 @@ import { vendorAPI } from "./VendorAPI";
 export default function VendorForm() {
   //we will navigate back to the main page when save
   const navigate = useNavigate();
-  //I need the id from useParams to pass to the find()
-  //in this case, the type needs to specify the key?
+ //I need the id from useParams to pass to the find()
+ //id is a property of useParams obj
   const { id } = useParams<{ id: string }>();
-  const vendorId = Number(id);
+  const vendorId = Number(id); //change the string to number
 
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<Vendor>({
+    //defaultValues specifies the initial values for the form fields
+    //this will initialize a new Vendor in case I'm creating one or finding a vendor in case I'm editing it
     defaultValues: async () => {
       if (!vendorId) {
         return Promise.resolve(new Vendor());

@@ -1,16 +1,20 @@
-import { useEffect, useState } from "react";
+import { SyntheticEvent, useEffect, useState } from "react";
 import { Request } from "./Request";
 import { requestAPI } from "./RequestAPI";
 import RequestCard from "./RequestCard";
 import toast from "react-hot-toast";
+import { useSearchParams } from "react-router-dom";
 
 export default function RequestList() {
+  // const [searchParams, setSearchParams] = useSearchParams();
+
   const [requests, setRequests] = useState<Request[]>([]);
   const [busy, setBusy] = useState(false);
 
   async function loadRequests() {
     setBusy(true);
     let data = await requestAPI.list();
+    // searchParams.get("status") ?? undefined
     setRequests(data);
     setBusy(false);
   }
@@ -21,6 +25,10 @@ export default function RequestList() {
   useEffect(() => {
     loadRequests();
   }, []);
+
+  // useEffect(() => {
+  //   loadRequests();
+  // }, [searchParams.get("status")]);
 
   async function remove(request: Request) {
     if (confirm("Are you sure you want to delete this Request?")) {
@@ -33,17 +41,24 @@ export default function RequestList() {
     }
   }
 
+
+  // function handleStatusChange(event: SyntheticEvent) {
+  //   setSearchParams({ status: (event.target as HTMLSelectElement).value });
+  // }
+
   return (
     <>
       <div className="d-flex flex-column mb-4 w-25">
         <label htmlFor="status" className="form-label">
           Status
         </label>
-        <select id="status" className="form-select">
+        <select id="status" className="form-select" 
+          >
           <option value="">All</option>
           <option value="NEW">New</option>
           <option value="REVIEW">Pending Review</option>
           <option value="APPROVED">Approved</option>
+          <option value="REJECTED">Rejected</option>
         </select>
       </div>
       <section className="list d-flex flex-row flex-wrap bg-light gap-5 p-4 rounded-4">

@@ -36,10 +36,7 @@ function SignInPage() {
 
   const signin: SubmitHandler<IAccount> = async (account) => {
     try {
-      const user = await userAPI.findByAccount(
-        account.username,
-        account.password
-      );
+      const user = await userAPI.findByAccount(account.username, account.password);
       persistUser(user);
       setUser(user);
 
@@ -70,11 +67,14 @@ function SignInPage() {
           d="M36.67 42.842C42.81 38.824 46.868 31.886 46.868 24c0-7.886-4.057-14.824-10.198-18.841A22.537 22.537 0 0 0 26.573 24 22.537 22.537 0 0 0 36.67 42.842Z"
         />
       </svg> */}
-     <svg id="logo-35" width={100} height={78} viewBox="0 0 50 39" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M16.4992 2H37.5808L22.0816 24.9729H1L16.4992 2Z" className="ccompli1" fill="#007AFF" />
-  <path d="M17.4224 27.102L11.4192 36H33.5008L49 13.0271H32.7024L23.2064 27.102H17.4224Z" className="ccustom" fill="#312ECB" />
-</svg>
-
+      <svg id="logo-35" width={100} height={78} viewBox="0 0 50 39" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M16.4992 2H37.5808L22.0816 24.9729H1L16.4992 2Z" className="ccompli1" fill="#007AFF" />
+        <path
+          d="M17.4224 27.102L11.4192 36H33.5008L49 13.0271H32.7024L23.2064 27.102H17.4224Z"
+          className="ccustom"
+          fill="#312ECB"
+        />
+      </svg>
 
       <span className="mx-2 fw-semibold">Purchase Request System</span>
       <div className="card w-25 h-25 p-4">

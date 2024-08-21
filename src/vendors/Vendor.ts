@@ -1,13 +1,13 @@
 export class Vendor {
-    id: number | undefined;
-    code = "";
+    id: number | undefined; //the database will create the id for me
+    code = ""; //type string
     name = "";
     address = "";
     city = "";
     state = "";
     zip = "";
-    phone: string | null = null;
-    email: string | null = null;
+    phone: string | null = null; //this field can be null in the database
+    email: string | null = null; //this field can be null in the database
     
     get isNew(): boolean {
         return this.id === undefined;

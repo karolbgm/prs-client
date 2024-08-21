@@ -6,7 +6,7 @@ import {
   } from "../utility/fetchUtilities";
 
 import { Vendor } from "./Vendor";
-
+//the base url will match my backend url
 let url = `${BASE_URL}/vendors`;
 
 export const vendorAPI = {
@@ -14,7 +14,7 @@ export const vendorAPI = {
       return fetch(`${url}?_sort=name&_order=asc`)
         .then(delay(600))
         .then(checkStatus)
-        .then(parseJSON);
+        .then(parseJSON); //we only use parseJson when we're getting data back from the request
     },
   
     find(id: number): Promise<Vendor> {
@@ -24,7 +24,7 @@ export const vendorAPI = {
     post(vendor: Vendor) {
       return fetch(`${url}`, {
         method: "POST",
-        body: JSON.stringify(vendor),
+        body: JSON.stringify(vendor), //JSON.stringigy will convert the js obj to JSON
         headers: {
           "Content-Type": "application/json",
         },

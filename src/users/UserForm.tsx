@@ -56,10 +56,10 @@ export default function UserForm() {
             placeholder="Enter first name"
             {...register("firstname", { required: true, maxLength: 30 })}
           />
-        <div className="invalid-feedback">{errors?.firstname?.type === "required" && "First name is required"}</div>
-        <div className="invalid-feedback">
-          {errors?.firstname?.type === "maxLength" && "No longer than 30 characters"}
-        </div>
+          <div className="invalid-feedback">{errors?.firstname?.type === "required" && "First name is required"}</div>
+          <div className="invalid-feedback">
+            {errors?.firstname?.type === "maxLength" && "No longer than 30 characters"}
+          </div>
         </div>
         <div className="mb-3 w-50">
           <label htmlFor="lastname" className="form-label">
@@ -72,8 +72,10 @@ export default function UserForm() {
             placeholder="Enter last name"
             {...register("lastname", { required: true, maxLength: 30 })}
           />
-        <div className="invalid-feedback">{errors?.lastname?.type === "required" && "Last name is required"}</div>
-           <div className="invalid-feedback">{errors?.lastname?.type === "maxLength" && "No longer than 30 characters"}</div>
+          <div className="invalid-feedback">{errors?.lastname?.type === "required" && "Last name is required"}</div>
+          <div className="invalid-feedback">
+            {errors?.lastname?.type === "maxLength" && "No longer than 30 characters"}
+          </div>
         </div>
       </div>
       <div className="row-1 d-flex flex-row w-100 gap-4">
@@ -115,7 +117,9 @@ export default function UserForm() {
             {...register("username", { required: true, maxLength: 30 })}
           />
           <div className="invalid-feedback">{errors?.username?.type === "required" && "Username is required"}</div>
-          <div className="invalid-feedback">{errors?.username?.type === "maxLength" && "No longer than 30 characters"}</div>
+          <div className="invalid-feedback">
+            {errors?.username?.type === "maxLength" && "No longer than 30 characters"}
+          </div>
         </div>
         <div className="mb-3 w-50">
           <label htmlFor="password" className="form-label">
@@ -129,7 +133,9 @@ export default function UserForm() {
             {...register("password", { required: true, maxLength: 30 })}
           />
           <div className="invalid-feedback">{errors?.password?.type === "required" && "Password is required"}</div>
-          <div className="invalid-feedback">{errors?.password?.type === "maxLength" && "No longer than 30 characters"}</div>
+          <div className="invalid-feedback">
+            {errors?.password?.type === "maxLength" && "No longer than 30 characters"}
+          </div>
         </div>
         <div className="mb-3 w-50">
           <label htmlFor="role" className="form-label">
