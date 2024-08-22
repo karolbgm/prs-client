@@ -8,6 +8,21 @@ interface RequestlinesTableProps {
   onRemove: (requestline: Requestline) => void;
 }
 export default function RequestlinesTable({ request, onRemove }: RequestlinesTableProps) {
+  const total = calculateTotal();
+  function calculateTotal() {
+    if (!request.requestLines) return 0;
+    const total = request.requestLines
+      .map((requestLine) => {
+        const amount =
+          (requestLine.product?.price ?? 0) * (requestLine?.quantity ?? 0);
+        return amount;
+      })
+      .reduce((accumulator, amount) => {
+        return accumulator + amount;
+      }, 0);
+    return total;
+  }
+
   return (
     <table className="table table-hover w-50">
       <thead>
@@ -53,7 +68,7 @@ export default function RequestlinesTable({ request, onRemove }: RequestlinesTab
           <td></td>
           <td></td>
           <td>
-            <strong>Total:</strong> ${request.total}
+            <strong>Total:</strong> ${total}
           </td>
           <td></td>
         </tr>
