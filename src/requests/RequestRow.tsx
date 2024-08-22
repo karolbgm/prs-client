@@ -3,12 +3,12 @@ import { Request } from "./Request";
 import Dropdown from "react-bootstrap/Dropdown";
 import { SyntheticEvent } from "react";
 
-interface RequestCardProps {
+interface RequestRowProps {
   request: Request;
   onRemove: (request: Request) => void;
 }
 
-export default function RequestCard({ request, onRemove }: RequestCardProps) {
+export default function RequestRow({ request, onRemove }: RequestRowProps) {
   //Changing badge color
   function badgeType(request: Request) {
     let badgeInfo;

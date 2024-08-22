@@ -1,6 +1,6 @@
 import bootstrapIcons from "bootstrap-icons/bootstrap-icons.svg";
 import { Link } from "react-router-dom";
-import RequestList from "./RequestList";
+import RequestTable from "./RequestTable";
 
 export default function RequestsPage() {
   return (
@@ -14,7 +14,7 @@ export default function RequestsPage() {
           Create a request
         </Link>
       </header>
-      <RequestList />
+      <RequestTable />
     </>
   );
 }

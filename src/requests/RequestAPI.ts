@@ -1,7 +1,6 @@
 import {
     BASE_URL,
     checkStatus,
-    delay,
     parseJSON,
   } from "../utility/fetchUtilities";
 
@@ -41,14 +40,20 @@ export const requestAPI = {
 
   },
   
-    list(): Promise<Request[]> {
-      // let requestsUrl = `${url}`;
-      // if (status) requestsUrl += `/status/${status.toUpperCase()}`;
-      return fetch(`${url}?_sort=name&_order=asc`)
-        .then(delay(600))
-        .then(checkStatus)
-        .then(parseJSON);
-    },
+  list(status?: string): Promise<Request[]> {
+    let requestsUrl = `${url}`;
+    if (status) requestsUrl += `/status/${status.toUpperCase()}`;
+    return fetch(requestsUrl).then(checkStatus).then(parseJSON);
+  },
+  //this was before the filter by status:
+    // list(): Promise<Request[]> {
+    //   // let requestsUrl = `${url}`;
+    //   // if (status) requestsUrl += `/status/${status.toUpperCase()}`;
+    //   return fetch(`${url}?_sort=name&_order=asc`)
+    //     .then(delay(600))
+    //     .then(checkStatus)
+    //     .then(parseJSON);
+    // },
   
     find(id: number): Promise<Request> {
       return fetch(`${url}/${id}`).then(checkStatus).then(parseJSON);
